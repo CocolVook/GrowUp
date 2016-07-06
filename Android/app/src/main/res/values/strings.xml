@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">GrowUp</string>
+    <string name="splash_slogan">splash_slogan</string>
+    <string name="copyright">Copyright © 2016 GrowUp All Rights Reserved\nPowered by Obsessive and Chris</string>
+</resources>
