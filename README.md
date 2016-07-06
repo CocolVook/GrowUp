@@ -1,5 +1,1 @@
-我是功能点2
-我是功能点1
-测试如何使用git branch 命令 git checkout 命令 以及 git checkout -b 命令
-# GrowUp
-Cocol grow up project修改了一个小bug
+这是一个代码片段项目，之所以取名GrowUp，是因为，只要是有对程序员有帮助的代码片段、代码规范、编程思维想法等。都可以记录在此！
