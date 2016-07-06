@@ -1,0 +1,58 @@
+<html>
+    
+<script type="text/javascript">
+
+
+function callCity()
+{
+    toApp.chooseCity(function(dataString){
+        Log('JS '+dataString);
+    })
+}
+
+function chooseCar()
+{
+    toApp.selectCar('11111',function(dataString){
+        Log('JS '+dataString);
+    })
+}
+
+function editCar()
+{
+    toApp.editCar('11111',function(dataString){
+        Log('JS '+dataString);
+    })
+}
+
+
+function addCar()
+{
+    toApp.addCar(function(dataString){
+        Log('JS '+dataString);
+    })
+}
+
+function getUserCar()
+{
+    Log('JS' + toApp.getUserCar());
+}
+
+</script>
+
+   
+<body>
+
+<button onclick="callCity()">选择城市</button>
+<br/>
+<button onclick="chooseCar()">换车</button>
+
+<button onclick="addCar()">添加车辆</button>
+<button onclick="editCar()">编辑爱车</button>
+<button onclick="getUserCar()">默认爱车</button>
+
+</body>
+    
+</html>
+
+
+    
