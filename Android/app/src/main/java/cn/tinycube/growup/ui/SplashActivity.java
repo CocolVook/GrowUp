@@ -37,24 +37,22 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (是否设置状态栏颜色()) {
-            设置状态栏颜色(getResources().getDrawable(R.drawable.sr_primary));
+        if (needSetStatusBarColor()) {
+            setStatusBarColor(getResources().getDrawable(R.drawable.sr_primary));
         }
         setContentView(R.layout.splash);
         ButterKnife.bind(this);
-        初始化友盟配置();
-
-        初始化界面();
-
-        初始化首页动画();
+        initUmengConfig();
+        initView();
+        initAnimation();
     }
 
 
-    protected boolean 是否设置状态栏颜色() {
+    protected boolean needSetStatusBarColor() {
         return false;
     }
 
-    protected void 设置状态栏颜色(Drawable tintDrawable) {
+    protected void setStatusBarColor(Drawable tintDrawable) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             SystemBarTintManager mTintManager = new SystemBarTintManager(this);
             if (tintDrawable != null) {
@@ -67,15 +65,15 @@ public class SplashActivity extends AppCompatActivity {
         }
     }
 
-    private void 初始化友盟配置() {
+    private void initUmengConfig() {
 
     }
 
-    private void 初始化界面() {
+    private void initView() {
 
     }
 
-    private void 初始化首页动画() {
+    private void initAnimation() {
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.splash);
         animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -84,7 +82,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                完成初始化();
+                finishInitial();
             }
 
             @Override
@@ -94,7 +92,7 @@ public class SplashActivity extends AppCompatActivity {
         mSplashImage.startAnimation(animation);
     }
 
-    private void 完成初始化() {
+    private void finishInitial() {
         startActivity(new Intent(this, MainActivity.class));
         finish();
     }

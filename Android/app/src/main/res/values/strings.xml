@@ -1,5 +1,7 @@
 <resources>
     <string name="app_name">GrowUp</string>
-    <string name="splash_slogan">splash_slogan</string>
+    <string name="page_main">主页</string>
+    <string name="page_about">关于</string>
+    <string name="splash_slogan">人生需要不断成长。</string>
     <string name="copyright">Copyright © 2016 GrowUp All Rights Reserved\nPowered by Obsessive and Chris</string>
 </resources>
