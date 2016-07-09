@@ -2,16 +2,11 @@ package cn.tinycube.growup.ui;
 
 import android.app.ListActivity;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
+import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.View;
-import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 
@@ -20,13 +15,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import cn.tinycube.growup.R;
-
 /**
  * @author: WangJianbiao
  * @time: 16/7/6-下午8:38.
  * @email: wangjianbiao@qccr.com
- * @desc:
+ * @desc: 主页
  */
 public class MainActivity extends ListActivity {
 
@@ -35,25 +28,29 @@ public class MainActivity extends ListActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        getActivityInfo();
+        loadSolveActivity();
         setListAdapter(new SimpleAdapter(this, activities, android.R.layout.simple_list_item_1, new String[]{"label"}, new int[]{android.R.id.text1}));
     }
 
-    private void getActivityInfo() {
-        PackageManager packageManager = getPackageManager();
+    /**
+     * 加载列表项
+     */
+    private void loadSolveActivity() {
+        PackageManager manager = getPackageManager();
         try {
-            PackageInfo info = packageManager.getPackageInfo(getPackageName(), PackageManager.GET_ACTIVITIES);
-            ActivityInfo[] activityInfos = info.activities;
-            if (activityInfos != null && activityInfos.length > 0) {
-                for (ActivityInfo ai : activityInfos) {
+            Intent intent = new Intent();
+            intent.setAction("cn.tinycube.activity.list");
+            intent.addCategory(Intent.CATEGORY_DEFAULT);
+            List<ResolveInfo> resolveInfo = manager.queryIntentActivities(intent, PackageManager.MATCH_DEFAULT_ONLY);
+            if (resolveInfo != null && !resolveInfo.isEmpty()) {
+                for (ResolveInfo resolve : resolveInfo) {
                     Map<String, String> map = new HashMap<>();
-                    map.put("name", ai.name);
-                    map.put("label", ai.loadLabel(packageManager).toString());
+                    map.put("name", resolve.activityInfo.name);
+                    map.put("label", resolve.activityInfo.loadLabel(manager).toString());
                     activities.add(map);
                 }
             }
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
+        } catch (Exception ignore) {
         }
     }
 
