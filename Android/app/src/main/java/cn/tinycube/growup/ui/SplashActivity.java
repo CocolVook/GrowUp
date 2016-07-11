@@ -1,6 +1,7 @@
 package cn.tinycube.growup.ui;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,7 +24,8 @@ import cn.tinycube.growup.utils.SystemBarTintManager;
  * @email: wangjianbiao@qccr.com
  * @desc:
  */
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends BaseActivity {
+
     // 启动图
     @Bind(R.id.image)
     ImageView mSplashImage;
@@ -37,9 +39,6 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (needSetStatusBarColor()) {
-            setStatusBarColor(getResources().getDrawable(R.drawable.sr_primary));
-        }
         setContentView(R.layout.splash);
         ButterKnife.bind(this);
         initUmengConfig();
@@ -47,22 +46,9 @@ public class SplashActivity extends AppCompatActivity {
         initAnimation();
     }
 
-
-    protected boolean needSetStatusBarColor() {
-        return false;
-    }
-
-    protected void setStatusBarColor(Drawable tintDrawable) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            SystemBarTintManager mTintManager = new SystemBarTintManager(this);
-            if (tintDrawable != null) {
-                mTintManager.setStatusBarTintEnabled(true);
-                mTintManager.setTintDrawable(tintDrawable);
-            } else {
-                mTintManager.setStatusBarTintEnabled(false);
-                mTintManager.setTintDrawable(null);
-            }
-        }
+    @Override
+    protected int onSetStatusBarColor() {
+        return android.R.color.transparent;
     }
 
     private void initUmengConfig() {

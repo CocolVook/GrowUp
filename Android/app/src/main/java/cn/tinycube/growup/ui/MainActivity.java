@@ -1,19 +1,29 @@
 package cn.tinycube.growup.ui;
 
-import android.app.ListActivity;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.content.pm.ResolveInfo;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.ListView;
-import android.widget.SimpleAdapter;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+import butterknife.Bind;
+import butterknife.ButterKnife;
+import cn.tinycube.growup.R;
 
 /**
  * @author: WangJianbiao
@@ -21,15 +31,53 @@ import java.util.Map;
  * @email: wangjianbiao@qccr.com
  * @desc: 主页
  */
-public class MainActivity extends ListActivity {
+public class MainActivity extends SimpleBackActivity {
 
     private List<Map<String, String>> activities = new ArrayList<>();
+
+    @Bind(R.id.list)
+    RecyclerView mListView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.main);
+        ButterKnife.bind(this);
+        setTitle("主页");
         loadSolveActivity();
-        setListAdapter(new SimpleAdapter(this, activities, android.R.layout.simple_list_item_1, new String[]{"label"}, new int[]{android.R.id.text1}));
+        mListView.setLayoutManager(new LinearLayoutManager(this));
+        mListView.setAdapter(new RecyclerView.Adapter<Holder>() {
+
+            @Override
+            public Holder onCreateViewHolder(ViewGroup parent, int viewType) {
+                View view = LayoutInflater.from(MainActivity.this).inflate(R.layout.simple_list, parent, false);
+                return new Holder(view);
+            }
+
+            @Override
+            public void onBindViewHolder(Holder holder, int position) {
+                final Map<String, String> map = activities.get(position);
+                holder.title.setText(map.get("label"));
+                holder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent();
+                        intent.setClassName(getPackageName(), map.get("name"));
+                        startActivity(intent);
+                    }
+                });
+            }
+
+            @Override
+            public int getItemCount() {
+                return activities == null ? 0 : activities.size();
+            }
+        });
+    }
+
+    @Override
+    protected int onSetStatusBarColor() {
+        return R.color.alpha_20_black;
     }
 
     /**
@@ -54,12 +102,13 @@ public class MainActivity extends ListActivity {
         }
     }
 
-    @Override
-    protected void onListItemClick(ListView l, View v, int position, long id) {
-        super.onListItemClick(l, v, position, id);
-        Map<String, String> activity = activities.get(position);
-        Intent intent = new Intent();
-        intent.setClassName(getPackageName(), activity.get("name"));
-        startActivity(intent);
+    class Holder extends RecyclerView.ViewHolder {
+
+        TextView title;
+
+        public Holder(View itemView) {
+            super(itemView);
+            title = (TextView) itemView.findViewById(R.id.text1);
+        }
     }
 }

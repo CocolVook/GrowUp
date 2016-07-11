@@ -3,6 +3,8 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <!-- window背景色 -->
+    <color name="windowBackground">#FFEEEEEE</color>
 
     <color name="navigation_checked_news_text_color">#FF4E3E80</color>
     <color name="navigation_checked_picture_text_color">#FFBA4A49</color>
