@@ -1,32 +1,67 @@
 <resources>
 
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:windowContentOverlay">@android:color/transparent</item>
-        <!-- 隐藏标题栏 -->
+    <style name="NoSystemActionBarTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!--去除自带的ActionBar,如果需要，自己在代码里面添加ToolBar-->
         <item name="windowActionBar">false</item>
+        <!-- 窗体是否有标题 -->
         <item name="windowNoTitle">true</item>
-        <item name="android:windowBackground">@color/sr_window_background</item>
+        <!-- window背景色 -->
+        <item name="android:windowBackground">@color/windowBackground</item>
+        <!-- 是否有边框 -->
+        <item name="android:windowFrame">@null</item>
+        <!-- 是否为全屏,全屏的话，就隐藏系统状态栏了.所以可以理解为是否隐藏状态栏 -->
+        <item name="android:windowFullscreen">false</item>
+    </style>
 
-        <item name="android:windowNoTitle">true</item>
-        <item name="android:windowIsTranslucent">true</item>
+    <style name="TranslucentStatusBarTheme" parent="NoSystemActionBarTheme">
+        <!-- 不支持透明状态栏 -->
+    </style>
 
-        <!--透明状态栏-->
-        <item name="android:windowTranslucentStatus">true</item>
-        <item name="android:statusBarColor">@android:color/transparent</item>
+    <style name="WidthMatch">
+        <item name="android:layout_width">match_parent</item>
+    </style>
 
-        <item name="android:navigationBarColor">@android:color/transparent</item>
-        <item name="android:windowContentTransitions">true</item>
-        <item name="android:windowTranslucentNavigation">true</item>
-        <item name="android:windowAllowEnterTransitionOverlap">true</item>
-        <item name="android:windowAllowReturnTransitionOverlap">true</item>
-        <item name="android:windowExitTransition">@android:transition/slide_right</item>
-        <item name="android:windowEnterTransition">@android:transition/slide_right</item>
-        <item name="android:windowSharedElementExitTransition">@android:transition/fade</item>
-        <item name="android:windowSharedElementEnterTransition">@android:transition/fade</item>
+    <style name="HeightMatch">
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="WidthWrap">
+        <item name="android:layout_width">wrap_content</item>
+    </style>
+
+    <style name="HeightWrap">
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="MatchMatch">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="MatchWrap">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <style name="WrapMatch">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="WrapWrap">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+    </style>
+
+    <!-- match_parent  : 48dp -->
+    <style name="MatchWrap.FixedHeight">
+        <item name="android:layout_height">?attr/titleHeight</item>
+    </style>
+
+    <!-- wrap_content  : match_parent -->
+    <style name="WrapMatch.MinWidth">
+        <item name="android:minWidth">?attr/titleHeight</item>
     </style>
 
 </resources>

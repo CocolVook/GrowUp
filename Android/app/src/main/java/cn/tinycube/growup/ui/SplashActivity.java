@@ -1,6 +1,7 @@
 package cn.tinycube.growup.ui;
 
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.os.Bundle;
@@ -23,7 +24,8 @@ import cn.tinycube.growup.utils.SystemBarTintManager;
  * @email: wangjianbiao@qccr.com
  * @desc:
  */
-public class SplashActivity extends AppCompatActivity {
+public class SplashActivity extends BaseActivity {
+
     // 启动图
     @Bind(R.id.image)
     ImageView mSplashImage;
@@ -37,45 +39,27 @@ public class SplashActivity extends AppCompatActivity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (是否设置状态栏颜色()) {
-            设置状态栏颜色(getResources().getDrawable(R.drawable.sr_primary));
-        }
         setContentView(R.layout.splash);
         ButterKnife.bind(this);
-        初始化友盟配置();
-
-        初始化界面();
-
-        初始化首页动画();
+        initUmengConfig();
+        initView();
+        initAnimation();
     }
 
-
-    protected boolean 是否设置状态栏颜色() {
-        return false;
+    @Override
+    protected int onSetStatusBarColor() {
+        return android.R.color.transparent;
     }
 
-    protected void 设置状态栏颜色(Drawable tintDrawable) {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            SystemBarTintManager mTintManager = new SystemBarTintManager(this);
-            if (tintDrawable != null) {
-                mTintManager.setStatusBarTintEnabled(true);
-                mTintManager.setTintDrawable(tintDrawable);
-            } else {
-                mTintManager.setStatusBarTintEnabled(false);
-                mTintManager.setTintDrawable(null);
-            }
-        }
-    }
-
-    private void 初始化友盟配置() {
+    private void initUmengConfig() {
 
     }
 
-    private void 初始化界面() {
+    private void initView() {
 
     }
 
-    private void 初始化首页动画() {
+    private void initAnimation() {
         Animation animation = AnimationUtils.loadAnimation(this, R.anim.splash);
         animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
@@ -84,7 +68,7 @@ public class SplashActivity extends AppCompatActivity {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                完成初始化();
+                finishInitial();
             }
 
             @Override
@@ -94,7 +78,7 @@ public class SplashActivity extends AppCompatActivity {
         mSplashImage.startAnimation(animation);
     }
 
-    private void 完成初始化() {
+    private void finishInitial() {
         startActivity(new Intent(this, MainActivity.class));
         finish();
     }
