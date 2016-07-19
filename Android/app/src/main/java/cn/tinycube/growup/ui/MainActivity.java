@@ -16,6 +16,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.orhanobut.logger.Logger;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -45,6 +47,7 @@ public class MainActivity extends SimpleBackActivity {
         ButterKnife.bind(this);
         setTitle("主页");
         loadSolveActivity();
+        Logger.t("@@@").json("{\"code\":0,\"info\":{\"result\":{\"tradeType\":\"APP\",\"timeStamp\":\"1468829842\",\"mchid\":\"1254118901\",\"prepayid\":\"wx2016071816172381494abff90476851604\",\"appid\":\"wxdcd1be88ce3924dc\",\"nonceStr\":\"8S9kc7GpJRggdAGQ\",\"sign\":\"7234AB2168BB69E66EB20AD36F6D1B01\",\"resultCode\":\"SUCCESS\",\"packageValue\":\"Sign=WXPay\"},\"success\":true},\"msg\":\"成功\"}");
         mListView.setLayoutManager(new LinearLayoutManager(this));
         mListView.setAdapter(new RecyclerView.Adapter<Holder>() {
 
